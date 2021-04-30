@@ -1,0 +1,51 @@
+
+.dropdow {
+    float: left;
+    overflow: hidden;
+    margin-left: 30px;
+  }
+  
+  .dropdow .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    margin-left: -200px;
+    background-color: inherit;
+    font-family: inherit; 
+    margin: 0;
+  }
+  
+  .navbar a:hover, .dropdow:hover .dropbtn {
+    background-color: black;
+  }
+  
+  .dropdow-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdow-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdow-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .dropdow:hover .dropdow-content {
+    display: block;
+  }
+  .dropdow .dropbtn .fas{
+    color: rgb(212, 148, 63);
+      margin-right: 10px;
+  }

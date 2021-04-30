@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" type="image/png" href="/logo.png">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/dropdown.css">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <title>Rare finds</title>
+    <link rel="stylesheet" href="/search.css">
+    <link rel="stylesheet" href="/home.css">
+     <link rel="stylesheet" href="/homedesign.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      $(document).ready(function(){
+        $(".default_option").click(function(){
+          $(".dropdown ul").addClass("active");
+        });
+
+        $(".dropdown ul li").click(function(){
+          var text = $(this).text();
+          $(".default_option").text(text);
+          $(".dropdown ul").removeClass("active");
+        });
+      });
+    </script>
+    
+</head>
+<body>
+    <header class="l-header">
+        <nav class="nav bd-grid">
+            <div id ="logo">
+              
+                <a href="index.html"><img src="/logo.png" 
+                  alt="" width="150" height="80"></a>
+            </div>
+			<form class="navbar-form">
+            <div class="wrapper">
+              <div class="search_box">
+                  <div class="dropdown">
+                      <div class="default_option">All</div>  
+                      <ul>
+                        <li>All</li>
+                        <li>Best sellers</li>
+                        <li>Featured</li>
+                        <li>Fiction</li>
+                        <li>Textbooks</li>
+                        <li>Kids</li>
+                        <li>Ebooks</li>
+                      </ul>
+                  </div>
+                  <div class="search_field">
+                    <input type="text" class="input" placeholder="Search by book title">
+                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                </div>
+              </div>
+          </div>
+			</form>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a th:href="@{/cart}"><i class="fas fa-shopping-cart">
+
+                    </i></a></li>
+                    <div class="dropdow">
+                   <li class="dropbtn"><i class="fas fa-book" ></i>Books <i class="fa fa-caret-down"></i>
+                   </li>
+							<div class="dropdow-content">
+								<a th:href="@{/bookshelf}">Browse the bookshelf</a>
+								<a href="#">Store hours &#38; Directions</a>
+								<a href="#">FAQ</a>
+								</div>
+								</div>
+							
+					<div class="dropdow">
+                      <li class="dropbtn"><i class="fas fa-user" ></i>My Account
+                      <i class="fa fa-caret-down"></i>
+                      </li>
+                      <div class="dropdow-content">
+                      <h3 align = "center" style = "color:black" th:inline="text">Hello, <span th:text="${#authentication.name}"></span>!</h3> 
+                        <a th:href="@{/manage_account}">My Account<i class =""></i></a>
+                        <a th:href="@{/logout}">Log Out<i class =""></i></a>
+                        <a th:href="@{/manage_address}">Address Info </a>
+                        <a th:href="@{/manage_payment}">Payment Method</a>
+                        <a th:href="@{/manage_orders}">Order Status</a>
+                      </div>
+                    </div>
+                    </ul>
+							
+                    
+            </div> 
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="l-main">
+
+        <section class="home" id="home">
+            <div class="home__container bd-grid">
+                <h1 class="home__title"><span>RARE</span><br>FINDS</h1>
+                <img src="assets/img/homebooks.png" alt="" class="home__img">
+            </div>
+        </section>
+
+        <section class="skills section" id="skills">
+            <h2 class="section-title">About</h2>
+
+            <div class="skills__container bd-grid">
+                <div class="skills__box">
+                    <h2 class="about__subtitle">Rare Finds</h2>
+                    <p class="about__text">Rare Finds is a luxury online book store.</p>
+                </div>
+
+                <div class="dogimg">
+                    <img src="assets/img/doggy2.jpg" alt="">
+                </div>
+            </div>
+        </section>
+
+
+      
+       <section class="about section" id="about">
+            <h2 class="section-title">Under $100</h2>
+            
+            
+        <div class = "design" id = "app">
+		<div class="book" v-for="book in books">
+      	<div class="book-inner">
+        <div v-bind:style="{ backgroundImage: 'url(' + book.img + ')' }" class="front face"></div>
+        <div v-bind:style="{ backgroundImage: 'url(' + book.img + ')' }" class="side"></div>
+        <div v-bind:style="{ backgroundImage: 'url(' + book.img + ')' }" class="back face"></div>
+        
+      	</div>
+      	<br>
+      	<div class="container">
+      	
+      	<div class="row">
+      		<div class="col-18 co-md-8">
+      			<button class="btn btn-secondary">Add to Cart</button>
+      		</div> 
+      		<div class="col-18 co-md-6">
+      			<button class="btn btn-info">85.99</button>
+      		</div>
+      	</div>
+      	</div>
+  		</div>
+
+</div>
+
+
+        <!--     <div class="about__container bd-grid">
+                <div class="about__img">
+                    <img src="assets/img/homebooks.png" alt="">
+                </div>
+
+                <div>
+                    <h2 class="about__subtitle">Rare Finds</h2>
+                    <p class="about__text">Find your next page-turner.</p>
+
+
+                    <style>
+                        * {box-sizing: border-box}
+                        body {font-family: Verdana, sans-serif; margin:0}
+                        .mySlides {display: none}
+                        img {vertical-align: middle;}
+                        
+                       
+                        .slideshow-container {
+                          max-width: 250px;
+                          position: relative;
+                          margin: auto;
+                        }
+                        
+                  
+                        .prev, .next {
+                          cursor: pointer;
+                          position: absolute;
+                          top: 50%;
+                          width: auto;
+                          padding: 16px;
+                          margin-top: -22px;
+                          color: white;
+                          font-weight: bold;
+                          font-size: 18px;
+                          transition: 0.6s ease;
+                          border-radius: 0 3px 3px 0;
+                          user-select: none;
+                        }
+                        
+      
+                        .next {
+                          right: 0;
+                          border-radius: 3px 0 0 3px;
+                        }
+                        
+                    
+                        .prev:hover, .next:hover {
+                          background-color: rgba(0,0,0,0.8);
+                        }
+                        
+           
+                        .text {
+                          color: #f2f2f2;
+                          font-size: 15px;
+                          padding: 8px 12px;
+                          position: absolute;
+                          bottom: 8px;
+                          width: 100%;
+                          text-align: center;
+                        }
+                        
+                     
+                        .numbertext {
+                          color: #f2f2f2;
+                          font-size: 12px;
+                          padding: 8px 12px;
+                          position: absolute;
+                          top: 0;
+                        }
+                        
+                 
+                        .dot {
+                          cursor: pointer;
+                          height: 15px;
+                          width: 15px;
+                          margin: 0 2px;
+                          background-color: #bbb;
+                          border-radius: 50%;
+                          display: inline-block;
+                          transition: background-color 0.6s ease;
+                        }
+                        
+                        .active, .dot:hover {
+                          background-color: #717171;
+                        }
+                        
+      
+                        .fade {
+                          -webkit-animation-name: fade;
+                          -webkit-animation-duration: 1.5s;
+                          animation-name: fade;
+                          animation-duration: 1.5s;
+                        }
+                        
+                        @-webkit-keyframes fade {
+                          from {opacity: .4} 
+                          to {opacity: 1}
+                        }
+                        
+                        @keyframes fade {
+                          from {opacity: .4} 
+                          to {opacity: 1}
+                        }
+                        
+            
+                        @media only screen and (max-width: 300px) {
+                          .prev, .next,.text {font-size: 11px}
+                        }
+                        </style>
+                       
+                        
+                        <div class="slideshow-container">
+                        
+                        <div class="mySlides fade">
+                          <a href="151days.html">
+                          <img src="assets/img/151days.jpg" style="width:100%">
+                        </a></div>
+                        
+                        <div class="mySlides fade">
+                          <a href="greatgatsby.html">
+                          <img src="assets/img/greatgats.jpg" style="width:100%"></a>
+                        </div>
+                        
+                        <div class="mySlides fade">
+                          <a href="lesmis.html">
+                          <img src="assets/img/lesmis.jpg" style="width:100%"></a>
+                        </div>
+                        
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        
+                        </div>
+                        <br>
+                        
+                        <div style="text-align:center">
+                          <span class="dot" onclick="currentSlide(1)"></span> 
+                          <span class="dot" onclick="currentSlide(2)"></span> 
+                          <span class="dot" onclick="currentSlide(3)"></span> 
+                        </div>
+                        
+                        <script>
+                        var slideIndex = 1;
+                        showSlides(slideIndex);
+                        
+                        function plusSlides(n) {
+                          showSlides(slideIndex += n);
+                        }
+                        
+                        function currentSlide(n) {
+                          showSlides(slideIndex = n);
+                        }
+                        
+                        function showSlides(n) {
+                          var i;
+                          var slides = document.getElementsByClassName("mySlides");
+                          var dots = document.getElementsByClassName("dot");
+                          if (n > slides.length) {slideIndex = 1}    
+                          if (n < 1) {slideIndex = slides.length}
+                          for (i = 0; i < slides.length; i++) {
+                              slides[i].style.display = "none";  
+                          }
+                          for (i = 0; i < dots.length; i++) {
+                              dots[i].className = dots[i].className.replace(" active", "");
+                          }
+                          slides[slideIndex-1].style.display = "block";  
+                          dots[slideIndex-1].className += " active";
+                        }
+                        </script>
+
+
+
+                </div>
+             -->
+       
+        </section>
+
+
+        <section class="portfolio section" id="portfolio">
+            <h2 class="section-title">Top Sellers</h2>
+
+            <div class="portfolio__container bd-grid">
+                <div class="bookimg">
+                    <img src="assets/img/juliusc.jpg" alt="">
+
+                    <div class="portfolio__link">
+                        <a th:href="@{/ju_lius}" class="portfolio__link-name">View details</a>
+                    </div>
+                </div>
+                <div class="bookimg">
+                    <img src="assets/img/romeo.jpg" alt="">
+
+                    <div class="portfolio__link">
+                        <a th:href="@{/romeo}" class="portfolio__link-name">View details</a>
+                    </div>
+                </div>
+                <div class="bookimg">
+                    <img src="assets/img/macbeth.jpg" alt="">
+
+                    <div class="portfolio__link">
+                        <a th:href="@{/mac_beth}" class="portfolio__link-name">View details</a>
+                    </div>
+                </div>
+                <div class="bookimg">
+                    <img src="assets/img/dickinson.jpg" alt="">
+
+                    <div class="portfolio__link">
+                        <a th:href="@{/emi_ly}" class="portfolio__link-name">View details</a>
+                    </div>
+                </div>
+                <div class="bookimg">
+                    <img src="assets/img/frozenbook1.jpg" alt="">
+
+                    <div class="portfolio__link">
+                        <a th:href="@{/fro_zen}"class="portfolio__link-name">View details</a>
+                    </div>
+                </div>
+                <div class="bookimg">
+                    <img src="assets/img/hamlet.jpg" alt="">
+
+                    <div class="portfolio__link">
+                        <a th:href="@{/hamlet}"class="portfolio__link-name">View details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="contact section" id="contact">
+            <h2 class="section-title">Subscribe to our newsletter</h2>
+
+            <div class="contact__container bd-grid">
+                <form action="" class="contact__form">
+                    <div class="contact__inputs">
+                        <input type="mail" placeholder="Email" class="contact__input">
+                    </div>
+                    <input type="submit" value="Submit" class="contact__button">
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer section">
+    </footer>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+    var app = new Vue({
+    	  el: '#app',
+    	  data: {
+    	    books: [
+    	    	{img: 'https://images-na.ssl-images-amazon.com/images/I/51eeAWItwbL._SX281_BO1,204,203,200_.jpg'},
+      	      {img: 'https://images-na.ssl-images-amazon.com/images/I/81hKPqaR-BL.jpg'},
+      	      {img: 'https://images-na.ssl-images-amazon.com/images/I/71su1O1yFJL.jpg'},
+      	      {img: 'https://images-na.ssl-images-amazon.com/images/I/71shFGSgj0L.jpg'},
+      	      {img: 'https://images-na.ssl-images-amazon.com/images/I/71wdbkiRokL.jpg'},
+      	      {img: 'https://images-na.ssl-images-amazon.com/images/I/81aY1lxk+9L.jpg'},
+      	      {img: 'https://images-na.ssl-images-amazon.com/images/I/71H0EUnl5QL.jpg'},
+      	      {img: 'https://images-na.ssl-images-amazon.com/images/I/71eAXvgIrFL.jpg'},
+      	      {img: 'https://images-na.ssl-images-amazon.com/images/I/916LksNztcL.jpg'}
+    	    ]
+    	  }
+    	})
+    </script>
+</body>
+</html>

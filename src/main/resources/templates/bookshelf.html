@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Bookshelf</title>
+    <link href="/css/non-responsive.css" rel="stylesheet" />
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/dropdown.css">
+    <link rel="stylesheet" href="/search.css">
+    <link rel="stylesheet" href="/home.css">
+    <link rel="stylesheet" href="/homedesign.css">
+
+    <!-- data table -->
+    <link th:href="@{/css/jquery.dataTables.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/dataTables.bootstrap.min.css}" rel="stylesheet" />
+
+
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            color: #000;
+            overflow-x: hidden;
+            height: 100%;
+            background-color: #fff;
+            background-repeat: no-repeat
+        }
+
+        .plus-minus {
+            position: relative
+        }
+
+        .plus {
+            position: absolute;
+            top: -4px;
+            left: 2px;
+            cursor: pointer
+        }
+
+        .minus {
+            position: absolute;
+            top: 8px;
+            left: 5px;
+            cursor: pointer
+        }
+
+        .vsm-text:hover {
+            color: #FF5252
+        }
+
+        .book,
+        .book-img {
+            width: 120px;
+            height: 180px;
+            border-radius: 5px
+        }
+
+        .book {
+            margin: 20px 15px 5px 15px
+        }
+
+        .border-top {
+            border-top: 1px solid #EEEEEE !important;
+            margin-top: 20px;
+            padding-top: 15px
+        }
+
+        .card {
+            margin: 40px 0px;
+            padding: 40px 50px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.2)
+        }
+
+        input, textarea {
+            background-color: #FFFFFF;
+            padding: 8px 15px 8px 15px;
+            width: 100%;
+            border-radius: 5px !important;
+            box-sizing: border-box;
+            border: 1px solid #F3E5F5;
+            font-size: 15px !important;
+            color: #000 !important;
+            font-weight: 300
+        }
+
+        input:focus,
+        textarea:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            border: 1px solid #9FA8DA;
+            outline-width: 0;
+            font-weight: 400
+        }
+
+        button:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            outline-width: 0
+        }
+
+        .pay {
+            width: 80px;
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid #673AB7;
+            margin: 10px 20px 10px 0px;
+            cursor: pointer;
+            box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.2)
+        }
+
+        .gray {
+            -webkit-filter: grayscale(100%);
+            -moz-filter: grayscale(100%);
+            -o-filter: grayscale(100%);
+            -ms-filter: grayscale(100%);
+            filter: grayscale(100%);
+            color: #E0E0E0
+        }
+
+        .gray .pay {
+            box-shadow: none
+        }
+
+        #tax {
+            border-top: 1px lightgray solid;
+            margin-top: 10px;
+            padding-top: 10px
+        }
+
+        .btn-info {
+            border: none;
+            border-radius: 10px;
+            background-color: #c9a42b;
+            color: #fff;
+            padding: 8px 15px;
+            margin: 20px 0px;
+            cursor: pointer
+        }
+
+        .btn-info:hover {
+            background-color: #967d2a;
+            color: #fff
+        }
+
+        #checkout {
+            float: center;
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .book,
+            .book-img {
+                width: 100px;
+                height: 150px
+            }
+
+            .card {
+                padding-left: 15px;
+                padding-right: 15px
+            }
+
+            .mob-text {
+                font-size: 13px
+            }
+
+            .pad-left {
+                padding-left: 20px
+            }
+        }
+
+        .filterDiv {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .container {
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        /* Style the buttons */
+        .btn {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #ddd;
+        }
+
+        .btn.active {
+            background-color: #666;
+            color: white;
+
+        }
+
+        .btn_form {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        #logo {
+            position: static;
+            left: 10px;
+            margin-left: -78px;
+            margin-bottom: auto;
+            margin-right: 561px;
+            height: 10px;
+            width: 140px;
+            float: left;
+        }
+
+        .wrapper .search_box {
+            width: 495px;
+            background: #fff;
+            border-radius: 5px;
+            height: 40px;
+            display: flex;
+            padding: 10px;
+            box-shadow: 0 8px 6px -10px #b3c6ff;
+            margin-top: 0px;
+        }
+    </style>
+    <!-- <script>
+        $(document).ready(function () {
+            $('.radio-group .radio').click(function () {
+                $('.radio').addClass('gray');
+                $(this).removeClass('gray');
+            });
+            $('.plus-minus .plus').click(function () {
+                var count = $(this).parent().prev().text();
+                $(this).parent().prev().html(Number(count) + 1);
+            });
+            $('.plus-minus .minus').click(function () {
+                var count = $(this).parent().prev().text();
+                $(this).parent().prev().html(Number(count) - 1);
+            });
+        });
+    </script> -->
+
+
+</head>
+
+<header class="l-header" style="height: 69px;">
+    <nav class="nav bd-grid">
+        <div id="logo">
+            <a th:href="@{/}"><img src="/logo.png" alt="" width="150" height="80"></a>
+        </div>
+        <form class="navbar-form" th:action="@{/search}" method="post">
+            <div class="wrapper" >
+                <div class="search_box" >
+                    <div class="dropdown" name="searchType">
+                       <!-- <div class="default_option" th:value = "All">All</div> -->
+                                               <!-- <ul>
+                                                   <li th:value = "All">All</li>
+                                                   <li th:value = "Title">Title</li>
+                                                   <li th:value = "Author">Author</li>
+                                                   <li th:value = "ISBN">ISBN</li>
+                                                   <li th:value = "Category">Category</li>
+                                               </ul>  -->
+                             <select name="searchType">
+                            <option value="All">All</option>
+                            <option value="Title">Title</option>
+                            <option value="Author">Author</option>
+                            <option value="ISBN">ISBN</option>
+                            <option value="Category">Category</option>
+                        </select>
+                        <!-- <small>Search by:</small>
+                        <select name="searchType">
+                            <option value="All">All</option>
+                            <option value="Title">Title</option>
+                            <option value="Author">Author</option>
+                            <option value="ISBN">ISBN</option>
+                            <option value="Category">Category</option>
+                        </select> -->
+                    </div>
+                    <div class="search_field">
+                        <input type="text" class="input" name="searchTerms" placeholder="Search by book title">
+                        <button type="submit" class="btn btn-default" style="background-color: Transparent; background-repeat:no-repeat; border: none; cursor:pointer; overflow: hidden;"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list" style="margin-top:27px">
+                <li class="nav__item"><a th:href="@{/shoppingCart/cart}"><i class="fas fa-shopping-cart">
+
+                        </i></a></li>
+
+                <div class="dropdow" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <li class="dropbtn"><i class="fas fa-user"></i>My Account
+                        <i class="fa fa-caret-down"></i>
+                    </li>
+                    <div class="dropdow-content">
+                        <h3 align="center" style="color:black" th:inline="text">Hello, <span
+                                th:text="${#authentication.name}"></span>!</h3>
+                        <a th:href="@{/manage_account}">My Account<i class=""></i></a>
+                        <a th:href="@{/manage_address}">Address Info </a>
+                        <a th:href="@{/manage_payment}">Payment Method</a>
+                        <a th:href="@{/manage_order}">Order Status</a>
+                        <a th:href="@{/logout}">Log Out<i class=""></i></a>
+                    </div>
+                </div>
+
+
+                <div class="dropdow" th:unless="${#authorization.expression('isAuthenticated()')}">
+                    <li class="dropbtn"><i class="fas fa-user"></i>My Account
+                        <i class="fa fa-caret-down"></i>
+                    </li>
+                    <div class="dropdow-content">
+                        <a th:href="@{/user_login}">Login<i class=""></i></a>
+                        <a th:href="@{/register}">Signup<i class=""></i></a>
+                    </div>
+                </div>
+                <div class="dropdow">
+                    <li class="dropbtn"><i class="fas fa-book"></i>Books <i class="fa fa-caret-down"></i>
+                    </li>
+                    <div class="dropdow-content">
+                        <a th:href="@{/bookshelf}">Browse the bookshelf</a>
+                        <a href="#">Store hours &#38; Directions</a>
+                        <a href="#">FAQ</a>
+                    </div>
+                </div>
+            </ul>
+
+
+        </div>
+
+        <div class="nav__toggle" id="nav-toggle">
+            <i class='bx bx-menu'></i>
+        </div>
+    </nav>
+</header>
+
+<body class="bg-light">
+
+
+    <div class="container">
+
+
+        <div class="row" style="margin-bottom: 100px;">
+
+
+        </div>
+        <hr
+            style="position: absolute; width:1140px; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;" />
+        <img class="img-responsive" src="/wood.png" style="margin-top: -75px;" />
+        <hr
+            style="position: absolute; width:1140px; height: 6px; background-color: #333; z-index: -1; margin-top: -4px;" />
+        <hr
+            style="position: absolute; width:1140px; height: 6px; background-color: #333; z-index: -1; margin-top: 110px;" />
+        <div class="py-5 text-center">
+            <h2>Find Your Next Page Turner</h2>
+            <a th:href="@{/}">
+                <img src="/logo.png" alt="" width="150" height="80" class="center-block" />
+            </a>
+
+        </div>
+
+        <div class="py-5 text-center">
+            <h3> Sort by: </h3>
+            <div class="row d-flex justify-content-center">
+                <form th:action="@{/bookshelf_sorted}" method="post" class="btn" >
+                    <input type="hidden" name="type" th:value="Title" />
+                    <button type="submit" class="btn_form" >Title</button>
+                </form>
+                <form th:action="@{/bookshelf_sorted}" method="post" class="btn" >
+                    <input type="hidden" name="type" th:value="Author" />
+                    <button type="submit" class="btn_form">Author</button>
+                </form>
+                <form th:action="@{/bookshelf_sorted}" method="post" class="btn" >
+                    <input type="hidden" name="type" th:value="Category" />
+                    <button type="submit" class="btn_form">Category</button>
+                </form>
+                <form th:action="@{/bookshelf_sorted}" method="post" class="btn" >
+                    <input type="hidden" name="type" th:value="ISBN" />
+                    <button type="submit" class="btn_form">ISBN</button>
+                </form>
+                <form th:action="@{/bookshelf_sorted}" method="post" class="btn" >
+                    <input type="hidden" name="type" th:value="PriceLowToHigh" />
+                    <button type="submit" class="btn_form">Price (Low To High)</button>
+                </form>
+                <form th:action="@{/bookshelf_sorted}" method="post" class="btn" >
+                    <input type="hidden" name="type" th:value="PriceHighToLow" />
+                    <button type="submit" class="btn_form">Price (High to Low)</button>
+                </form>
+                <form th:action="@{/bookshelf_sorted}" method="post" class="btn" >
+                    <input type="hidden" name="type" th:value="Rating" />
+                    <button type="submit" class="btn_form">Rating</button>
+                </form>
+
+            </div>
+
+            <h3> Filtered by: </h3>
+            <div id="myBtnContainer">
+                <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+                <button class="btn" onclick="filterSelection('novel')"> Novel</button>
+                <button class="btn" onclick="filterSelection('fiction')"> Fiction</button>
+                <button class="btn" onclick="filterSelection('poetry')"> Poetry</button>
+                <button class="btn" onclick="filterSelection('play')"> Play</button>
+                <button class="btn" onclick="filterSelection('artsAndLit')">Arts &amp; Literature</button>
+                <!--            <button class="btn" onclick="filterSelection('15and30')">Title</button>-->
+                <!--            <button class="btn" onclick="filterSelection('30and50')">Author</button>-->
+                <button class="btn" onclick="filterSelection('featured')">Featured</button>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 60px;">
+            <div class="col-xs-9 col-xs-offset-3" style="margin-left: 14%">
+                <div th:if="${emptyList}">
+                    <h5 style="font-style: italic;">Oops, no result is found. Try
+                        something else or try again later.</h5>
+                </div>
+
+                <table border="0" id="bookList">
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="book-item" data-th-each="book : ${bookList}">
+                            <td>
+                                <div class="filterDiv " th:classappend="${ ((book.getCategories() == 'Novel') ? 'novel' : '') +
+                             ((book.getCategories() == 'Fiction') ? 'fiction' : '') +
+                             ((book.getCategories() == 'Poetry') ? 'poetry' : '') +
+                             ((book.getCategories() == 'Play') ? 'play' : '') +
+                             ((book.getCategories() == 'Arts & Literature') ? 'artsAndLit' : '') +
+                             ((book.isFeatured() == 1) ? 'featured' : '') }" th:if="${book != null}">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <a th:href="@{/bookDetail?id=}+${book.Bookid}"><img
+                                                    class="img-responsive shelf-book" th:src="${book.cover_pic}"
+                                                    width="250" height="350" /></a>
+                                                    <br>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <a th:href="@{/bookDetail?id=}+${book.Bookid}">
+                                                <h4 th:text="${book.title}"></h4>
+                                            </a> <span th:text="${book.publisherYear}"></span>
+                                            <p th:text="${book.name}"></p>
+                                            <div>
+                                                <i class="fas fa-star" th:each="i : ${book.getRatingAsList()}"
+                                                    th:if="${i == 1}"></i>
+                                                <i class="far fa-star" th:each="i : ${book.getRatingAsList()}"
+                                                    th:if="${i == 0}"></i>
+                                            </div>
+
+
+                                            <a th:href="@{/bookDetail?id=}+${book.Bookid}"><span
+                                                    style="font-size: x-large; color: #db3208;">$<span
+                                                        th:text="${#numbers.formatDecimal(book.price, 0 , 'COMMA', 2, 'POINT')}"></span></span></a>
+
+                                            <p th:utext="${#strings.abbreviate(book.description, 500)}"></p>
+                                        </div>
+                                    </div>
+                                   <hr
+            style="width:1140px; height: 6px; background-color: #333;" />
+                                </div>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+        <script>
+            filterSelection("all")
+            function filterSelection(c) {
+                var x, i;
+                x = document.getElementsByClassName("filterDiv");
+                if (c == "all") c = "";
+                for (i = 0; i < x.length; i++) {
+                    w3RemoveClass(x[i], "show");
+                    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+                }
+            }
+
+            function w3AddClass(element, name) {
+                var i, arr1, arr2;
+                arr1 = element.className.split(" ");
+                arr2 = name.split(" ");
+                for (i = 0; i < arr2.length; i++) {
+                    if (arr1.indexOf(arr2[i]) == -1) { element.className += " " + arr2[i]; }
+                }
+            }
+
+            function w3RemoveClass(element, name) {
+                var i, arr1, arr2;
+                arr1 = element.className.split(" ");
+                arr2 = name.split(" ");
+                for (i = 0; i < arr2.length; i++) {
+                    while (arr1.indexOf(arr2[i]) > -1) {
+                        arr1.splice(arr1.indexOf(arr2[i]), 1);
+                    }
+                }
+                element.className = arr1.join(" ");
+            }
+
+            var btnContainer = document.getElementById("myBtnContainer");
+            var btns = btnContainer.getElementsByClassName("btn");
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener("click", function () {
+                    var current = document.getElementsByClassName("active");
+                    current[0].className = current[0].className.replace(" active", "");
+                    this.className += " active";
+                });
+            }
+
+        </script>
+    </div>
+
+</body>
+
+
+</html>

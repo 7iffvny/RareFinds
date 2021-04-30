@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" type="image/png" href="/logo.png">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/dropdown.css">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <title>Rare finds</title>
+    
+     <link href="/css/non-responsive.css" rel="stylesheet" />
+     <!-- data table -->
+	<link th:href="@{/css/jquery.dataTables.min.css}" rel="stylesheet" />
+	<link th:href="@{/css/dataTables.bootstrap.min.css}" rel="stylesheet" />
+	 <link href="/css/bootstrap.min.css" rel="stylesheet" />
+	 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    
+    <style>
+        body {
+            color: #000;
+            overflow-x: hidden;
+            height: 100%;
+            background-color: #fff;
+            background-repeat: no-repeat
+        }
+
+        .plus-minus {
+            position: relative
+        }
+
+        .plus {
+            position: absolute;
+            top: -4px;
+            left: 2px;
+            cursor: pointer
+        }
+
+        .minus {
+            position: absolute;
+            top: 8px;
+            left: 5px;
+            cursor: pointer
+        }
+
+        .vsm-text:hover {
+            color: #FF5252
+        }
+
+        .book,
+        .book-img {
+            width: 120px;
+            height: 180px;
+            border-radius: 5px
+        }
+
+        .book {
+            margin: 20px 15px 5px 15px
+        }
+
+        .border-top {
+            border-top: 1px solid #EEEEEE !important;
+            margin-top: 20px;
+            padding-top: 15px
+        }
+
+        .card {
+            margin: 40px 0px;
+            padding: 40px 50px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.2)
+        }
+
+        input,
+        textarea {
+            background-color: #FFFFF;
+            padding: 8px 15px 8px 15px;
+            width: 100%;
+            border-radius: 5px !important;
+            box-sizing: border-box;
+            border: 1px solid #F3E5F5;
+            font-size: 15px !important;
+            color: #000 !important;
+            font-weight: 300
+        }
+
+        input:focus,
+        textarea:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            border: 1px solid #9FA8DA;
+            outline-width: 0;
+            font-weight: 400
+        }
+
+        button:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            outline-width: 0
+        }
+
+        .pay {
+            width: 80px;
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid #673AB7;
+            margin: 10px 20px 10px 0px;
+            cursor: pointer;
+            box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.2)
+        }
+
+        .gray {
+            -webkit-filter: grayscale(100%);
+            -moz-filter: grayscale(100%);
+            -o-filter: grayscale(100%);
+            -ms-filter: grayscale(100%);
+            filter: grayscale(100%);
+            color: #E0E0E0
+        }
+
+        .gray .pay {
+            box-shadow: none
+        }
+
+        #tax {
+            border-top: 1px lightgray solid;
+            margin-top: 10px;
+            padding-top: 10px
+        }
+
+        .btn-info {
+            border: none;
+            border-radius: 10px;
+            background-color: #c9a42b;
+            color: #fff;
+            padding: 8px 15px;
+            margin: 20px 0px;
+            cursor: pointer
+        }
+
+        .btn-info:hover {
+            background-color: #967d2a;
+            color: #fff
+        }
+
+        #checkout {
+            float: center;
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .book,
+            .book-img {
+                width: 100px;
+                height: 150px
+            }
+
+            .card {
+                padding-left: 15px;
+                padding-right: 15px
+            }
+
+            .mob-text {
+                font-size: 13px
+            }
+
+            .pad-left {
+                padding-left: 20px
+            }
+        }
+    </style>
+<body>
+
+<div class="container">
+
+
+            <div class="row" style="margin-bottom: 100px;">
+			
+			
+		</div>
+		<hr style="position: absolute; width:1140px; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;" />
+		<img class="img-responsive" src="/wood.png"
+			style="margin-top: -75px;" />
+			<hr style="position: absolute; width:1140px; height: 6px; background-color: #333; z-index: -1; margin-top: -4px;" />
+			<hr style="position: absolute; width:1140px; height: 6px; background-color: #333; z-index: -1; margin-top: 80px;" />
+            <div class="py-5 text-center">
+                <h2>Find Your Next Page Turner</h2>
+                <a th:href="@{/}"><img  src="/logo.png" alt="" width="150" height="80" class="center-block" /></a>
+            </div>
+            
+    <form th:action="@{/shoppingCart/addItem}" method="post">
+    	<input hidden="hidden" th:field="*{book.Bookid}" />
+    	<div class="row" style="margin: 120px;" >
+    		<div class="col-xs-3 text-left">
+    			<a th:href="@{/bookshelf}" class="btn btn-info"  role="button">Back to book list</a>
+    			<div class="col-xs-3 text-right" style="margin: -80px 90px 0px 800px;">
+    			<a th:href="@{/shoppingCart/cart}" class="btn btn-info"  role="button"><i class="fas fa-shopping-cart">
+
+                    </i> shopping cart</a></div><br/>
+    			<img class="img-responsive shelf-book" th:src="${book.cover_pic}"/>
+    		</div>
+    		
+    		<div class="col-xs-12">
+    		<h3><span th:if="${addBookSuccess}" style="color: forestgreen"><i class="fa fa-check" aria-hidden="true" style="color: forestgreen"></i>Added to cart.</span></h3>
+    			<h3><span th:if="${notEnoughStock}" style="color: red">Oops, only <span th:text="${book.inStockNumber}"></span> In Stock.</span></h3>
+    			<h3 th:text="${book.title}" >Book Title</h3>
+    			<div class="row">
+    				<div class="col-xs-5">
+    					<h5><strong>Author: </strong><span th:text="${book.name}"></span></h5>
+    					<p><strong>Publisher: </strong><span th:text="${book.publisherName}"></span></p>
+    					<p><strong>Publication Date: </strong><span th:text="${book.publisherYear}"></span></p>
+    					<p><strong>Category: </strong><span th:text="${book.categories}"></span></p>
+    					<p><strong>ISBN: </strong><span th:text="${book.isbn}"></span></p>
+    					<div >
+                            <p><strong>Rating: </strong>
+                            <i class="fas fa-star" th:each="i : ${book.getRatingAsList()}" th:if="${i == 1}"></i>
+                            <i class="far fa-star" th:each="i : ${book.getRatingAsList()}" th:if="${i == 0}"></i>
+                            </p>
+                        </div>
+    				</div>
+    				
+    				<div class="col-xs-7">
+    					<div class="panel panel-default" style="border-width: 5px; margin-top: 20px;">
+    						<div class="panel-body">
+    							<div class="row">
+    								<div class="col-xs-6">
+    									<h6>Our Price: <span style="color:#db3208;">$<span th:text="${book.price}">   </span></span></h6>
+    									<span>Qty: </span>
+    									<select name="qty">
+    										<option th:each="qty : ${qtyList}" th:value="${qty}" th:text="${qty}">
+    										</option>
+    									</select>
+    								</div>
+    								<br/>
+    								<div class="col-xs-6">
+    									<h6 th:if="*{book.inStockNumber&gt;10}" style="color: green">In Stock</h6>
+    									<h6 th:if="*{book.inStockNumber&lt;10 and book.inStockNumber&gt;0}" style="color: green">  Only <span th:text="${book.inStockNumber}"> </span> In Stock</h6>
+    									<h6 th:if="*{book.inStockNumber==0}" style="color:darkred; margin: 0px 0px 0px 20px; ">Unavailable</h6>
+    									<button type="submit" class="btn btn-info" style="color:black;border:1px solid black; padding: 10px 40px 10px 40px;">Add to Cart</button>
+    								</div>
+    							</div>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+    			
+    			<hr/>
+    			<h5><strong>Description: </strong></h5>
+    			<p th:utext="${book.description}"></p>
+    		</div>
+    	</div>
+    </form>
+    </div>
+<!-- end of container -->
+
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>Cart</title>
+  <link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+  <link href="/css/non-responsive.css" rel="stylesheet" />
+
+  <!-- data table -->
+  <link th:href="@{/css/jquery.dataTables.min.css}" rel="stylesheet" />
+  <link th:href="@{/css/dataTables.bootstrap.min.css}" rel="stylesheet" />
+  <link href="/css/style.css" rel="stylesheet" />
+  <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+  <script th:src="@{/js/jquery.min.js}"></script>
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+
+  <script th:src="@{/js/scripts.js}"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+</head>
+<style>
+  body {
+    text-align: center;
+    padding: 39px 0;
+    background: white;
+  }
+
+  .card {
+    background: #F0F0F0;
+    padding: 58px;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 0 auto;
+  }
+
+  p {
+    color: black;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-size: 21px;
+    margin: 0;
+  }
+
+  h1 {
+    color: #daa520;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-weight: 899;
+    font-size: 41px;
+    margin-bottom: 11px;
+  }
+
+  i {
+    color: #daa520;
+    font-size: 96px;
+    line-height: 198px;
+    margin-left: -14px;
+  }
+
+  .btn-primary {
+    color: #fff;
+    background-color: #daa520;
+    border-color: #daa520;
+  }
+</style>
+
+<body>
+  <div class="card">
+    <div style="height:300px; width:300px; background: black; margin:0 auto;">
+      <img class="checkmark" style="margin-top:10px;" src="/assets/img/ordermeme.jpeg" alt="kermit" width="280"
+        height="280">
+    </div>
+    <h1>Order Confirmation</h1>
+    <p>Your order was placed successfully.<br />Thank you for shopping at Rare Finds!</p>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <a th:href="@{/bookshelf}" class="btn btn-primary" role="button">Continue shopping</a>
+    </div>
+  </div>
+</body>
+
+</html>

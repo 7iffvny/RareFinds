@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/dropdown.css">
+    <link rel="shortcut icon" type="image/png" href="/logo.png">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <title>Rare finds</title>
+    <link rel="stylesheet" href="/search.css">
+    <link rel="stylesheet" href="/home.css">
+     <link rel="stylesheet" href="/homedesign.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+    </script>
+    <script>
+      $(document).ready(function(){
+        $(".default_option").click(function(){
+          $(".dropdown ul").addClass("active");
+        });
+
+        $(".dropdown ul li").click(function(){
+          var text = $(this).text();
+          $(".default_option").text(text);
+          $(".dropdown ul").removeClass("active");
+        });
+      });
+    </script>
+    
+</head>
+<body>
+    <header class="l-header">
+        <nav class="nav bd-grid">
+            <div>
+              
+                <a href="index.html"><img class="logo" src="/logo.png" 
+                  alt="" width="150" height="80"></a>
+            </div>
+
+            <div class="wrapper">
+              <div class="search_box">
+                  <div class="dropdown">
+                      <div class="default_option">All</div>  
+                      <ul>
+                        <li>All</li>
+                        <li>Best sellers</li>
+                        <li>Featured</li>
+                        <li>Fiction</li>
+                        <li>Textbooks</li>
+                        <li>Kids</li>
+                        <li>Ebooks</li>
+                      </ul>
+                  </div>
+                  <div class="search_field">
+                    <input type="text" class="input" placeholder="Search by book title">
+                    <i class="fas fa-search"></i>
+                </div>
+              </div>
+          </div>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a th:href="@{/cart_view}"><i class="fas fa-shopping-cart">
+			 
+                    </i></a></li>
+                    <div class="dropdow" th:if="${#authorization.expression('isAuthenticated()')}">
+                      <li class="dropbtn"><i class="fas fa-user" ></i>My Account
+                      <i class="fa fa-caret-down"></i>
+                      </li>
+                      <div class="dropdow-content">
+                      	<h3 align = "center" style = "color:black" th:inline="text">Hello, <span th:text="${#authentication.name}"></span>!</h3> 
+                        <a th:href="@{/manage_account}">My Account<i class =""></i></a>
+                        <a th:href="@{/logout}">Log Out<i class =""></i></a>
+                        <a th:href="@{/manage_address}">Address Info </a>
+                        <a th:href="@{/manage_payment}">Payment Method</a>
+                        <a th:href="@{/manage_orders}">Order Status</a>
+                      </div>
+                    </div>
+<!-- <div th:if="${#authorization.expression('isAuthenticated()')}">  
+                <h1 th:inline="text">Hello, <span th:text="${#authentication.name}"></span>!</h1>  
+            </div>  -->
+                    <div class="dropdow" th:unless="${#authorization.expression('isAuthenticated()')}">
+                      <li class="dropbtn"><i class="fas fa-user" ></i>My Account
+                      <i class="fa fa-caret-down"></i>
+                      </li>
+                      <div class="dropdow-content">
+                        <a th:href="@{/user_login}">Login<i class =""></i></a>
+                        <a th:href="@{/register}">Signup<i class =""></i></a>
+                      </div>
+                    </div>
+            </div> 
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="l-main">
+
+
+      <section class="about section" id="about">
+        <h2 class="section-title">Frozen II: The Enchanted Forest</h2>
+
+        <style>
+          .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 250px;
+            margin: auto;
+            text-align: center;
+            font-family: arial;
+          }
+          
+          .price {
+            color:black;
+            font-size: 22px;
+          }
+          
+          .card button {
+            border: none;
+            outline: 0;
+            padding: 12px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+          }
+          
+          .card button:hover {
+            opacity: 0.7;
+          }
+          </style>
+          </head>
+          <body>
+          
+
+          
+          <div class="card">
+            <img src="assets/img/frozenbook1.jpg"  style="width:100%">
+            <p class="price">$20.19</p>
+            <p><button>Add to Cart</button></p>
+          </div>
+          
+
+
+        </div>
+    </section>
+
+
+        <section class="skills section" id="skills">
+
+            <div class="skills__container bd-grid">
+                <div class="skills__box">
+                    <h2 class="about__subtitle">Overview</h2>
+                    <p class="about__text">The play begins with the brief appearance of a trio of witches and then moves to a military camp, where the Scottish King Duncan hears the news that his generals, Macbeth and Banquo, have defeated two separate invading armies—one from Ireland, led by the rebel Macdonwald, and one from Norway. Following their pitched battle with these enemy forces, Macbeth and Banquo encounter the witches as they cross a moor. The witches prophesy that Macbeth will be made thane (a rank of Scottish nobility) of Cawdor and eventually King of Scotland. </p>
+                </div>
+
+                <div class="dogimg">
+                    <img src="assets/img/frozenmeme.jpg" alt="">
+                </div>
+            </div>
+        </section>
+
+
+      
+
+
+    </main>
+
+    <footer class="footer section">
+    </footer>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

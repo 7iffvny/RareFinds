@@ -1,0 +1,521 @@
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+Bootstrap core CSS
+<link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+<link href="/css/non-responsive.css" rel="stylesheet" />
+
+<link href="/css/font-awesome.min.css" rel="stylesheet" />
+
+Custom styles for this template
+<link href="/css/style.css" rel="stylesheet" />
+
+<style>
+	table {
+	border-collapse: collapse;
+	}
+	
+	table, th, td {
+	border:1px solid black;}
+</style>
+</head>
+<body>
+<p>Dear <span th:text="${user.firstname}"></span>,</p>
+<br/>
+<p>Thank you for shopping from our book store. We hope you had a good time with our service!</p>
+<p>Your order number is: <strong>#<span th:text="${order.id}"></span></strong>. Here is your order detail:</p>
+<h2>Order Detail for purchase #<span th:text="${order.id}"></span></h2>
+<hr/>
+
+<table>
+	<tr>
+		<th>Billing Detail</th>
+		<th>Payment Information</th>
+		<th>Shipping Address</th>
+	</tr>
+	<tr>
+		<td>
+			<span th:text="${order.billingAddress.billingName}"></span><br/>
+			<span th:text="${order.billingAddress.billingstreet1}+' '+${order.billingAddress.billingstreet2}"></span><br/>
+			<span th:text="${order.billingAddress.city}"></span><br/>
+			<span th:text="${order.billingAddress.state}"></span><br/>
+			<span th:text="${order.billingAddress.billingzipcode}"></span><br/>
+		</td>
+		<td>
+			<span th:text="${order.payment.cardholder}"></span><br/>
+			<span th:text="${order.payment.type}"></span><br/>
+			<span th:text="${order.payment.cardnumber}"></span><br/>
+			<span th:text="${order.payment.expmonth}"></span><br/>
+			<span th:text="${order.payment.expyear}"></span><br/>
+		</td>
+		<td>
+			<span th:text="${order.shippingAddress.shippingname}"></span><br/>
+			<span th:text="${order.shippingAddress.shippingstreet1}+' '+${order.shippingAddress.shippingstreet2}"></span><br/>
+			<span th:text="${order.shippingAddress.city}"></span><br/>
+			<span th:text="${order.shippingAddress.state}"></span><br/>
+			<span th:text="${order.shippingAddress.zipcode}"></span><br/>
+		</td>
+	</tr>
+</table>
+
+<h3><strong>Order Summary</strong></h3>
+<table>
+<thead>
+	<tr>
+		<td><strong>Item Name</strong></td>
+		<td class="text-center"><strong>Item Price</strong></td>
+		<td class="text-center"><strong>Item Quantity</strong></td>
+		<td class="text-right"><strong>Total</strong></td>
+	</tr>
+</thead>
+<tbody>
+	<tr th:each="cartItem : ${cartItemList}">
+		<td><span data-th-text="${cartItem.book.title}"></span></td>
+		<td class="text-center" data-th-text="${cartItem.book.price}"></td>
+		<td class="text-center" data-th-text="${cartItem.qty}"></td>
+		<td class="text-right" data-th-text="${cartItem.subtotal}"></td>
+	</tr>
+	<tr>
+		<td class="highrow"></td>
+		<td class="highrow"></td>
+		<td class="highrow text-center"><strong>Subtotal</strong></td>
+		<td class="highrow text-right" data-th-text="${order.orderTotal}"></td>
+	</tr>
+	<tr>
+		<td class="emptyrow"></td>
+		<td class="emptyrow"></td>
+		<td class="emptyrow text-center"><strong>Tax</strong></td>
+		<td class="emptyrow text-right" data-th-text="${#numbers.formatDecimal(order.orderTotal*0.06,0,2)}"></td>
+	</tr>
+	<tr>
+		<td class="emptyrow"><i class="fa fa-barcode iconbig"></i></td>
+		<td class="emptyrow"></td>
+		<td class="emptyrow text-center"><strong>Total</strong></td>
+		<td th:with="total=${order.orderTotal+order.orderTotal*0.06}"
+            data-th-text="${#numbers.formatDecimal(total, 0, 2)}"
+            class="emptyrow text-right">
+        </td>
+	</tr>
+</tbody>
+</table>
+
+<br/>
+<p>Best,</p>
+<p>RareFinds Bookstore</p>
+<p>Since 2021</p>
+
+
+
+</body>
+
+
+</html>
+
+ -->
+ <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+ 
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> Order confirmation </title>
+<meta name="robots" content="noindex,nofollow" />
+<meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+<style type="text/css">
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+  body { margin: 0; padding: 0; background: #e1e1e1; }
+  div, p, a, li, td { -webkit-text-size-adjust: none; }
+  .ReadMsgBody { width: 100%; background-color: #ffffff; }
+  .ExternalClass { width: 100%; background-color: #ffffff; }
+  body { width: 100%; height: 100%; background-color: #e1e1e1; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+  html { width: 100%; }
+  p { padding: 0 !important; margin-top: 0 !important; margin-right: 0 !important; margin-bottom: 0 !important; margin-left: 0 !important; }
+  .visibleMobile { display: none; }
+  .hiddenMobile { display: block; }
+
+  @media only screen and (max-width: 600px) {
+  body { width: auto !important; }
+  table[class=fullTable] { width: 96% !important; clear: both; }
+  table[class=fullPadding] { width: 85% !important; clear: both; }
+  table[class=col] { width: 45% !important; }
+  .erase { display: none; }
+  }
+
+  @media only screen and (max-width: 420px) {
+  table[class=fullTable] { width: 100% !important; clear: both; }
+  table[class=fullPadding] { width: 85% !important; clear: both; }
+  table[class=col] { width: 100% !important; clear: both; }
+  table[class=col] td { text-align: left !important; }
+  .erase { display: none; font-size: 0; max-height: 0; line-height: 0; padding: 0; }
+  .visibleMobile { display: block !important; }
+  .hiddenMobile { display: none !important; }
+  }
+</style>
+
+</head>
+<!-- Header -->
+<body>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+  <tr>
+    <td height="20"></td>
+  </tr>
+  <tr>
+    <td>
+      <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff" style="border-radius: 10px 10px 0 0;">
+        <tr class="hiddenMobile">
+          <td height="40"></td>
+        </tr>
+        <tr class="visibleMobile">
+          <td height="30"></td>
+        </tr>
+
+        <tr>
+          <td>
+            <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+              <tbody>
+                <tr>
+                  <td>
+                    <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                      <tbody>
+                        <tr class="hiddenMobile">
+                          <td height="40"></td>
+                        </tr>
+                        <tr class="visibleMobile">
+                          <td height="20"></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
+                            Order Received
+                            <br> Thank you for shopping at Rare Finds.
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
+                      <tbody>
+                        <tr class="visibleMobile">
+                          <td height="20"></td>
+                        </tr>
+                        <tr>
+                          <td height="5"></td>
+                        </tr>
+                        <tr>
+                        <tr class="hiddenMobile">
+                          <td height="50"></td>
+                        </tr>
+                        <tr class="visibleMobile">
+                          <td height="20"></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: right;">
+                            <small>ORDER</small> # <span th:text="${order.id}"></span><br />
+                            <small>Estimated Delivery: <span
+							th:text="${estimatedDeliveryDate}"></span> </small>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- /Header -->
+<!-- Order Details -->
+<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+  <tbody>
+    <tr>
+      <td>
+        <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+          <tbody>
+            <tr>
+            <tr class="hiddenMobile">
+              <td height="60"></td>
+            </tr>
+            <tr class="visibleMobile">
+              <td height="40"></td>
+            </tr>
+            <tr>
+              <td>
+                <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                  <tbody>
+                    <tr >
+                      <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="52%" align="left">
+                        Item
+                      </th>
+                      <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="left">
+                        <small>SKU</small>
+                      </th>
+                      <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="center">
+                        Quantity
+                      </th>
+                      <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #1e2b33; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="right">
+                        Subtotal
+                      </th>
+                    </tr>
+                    <tr>
+                      <td height="1" style="background: #bebebe;" colspan="4"></td>
+                    </tr>
+                    <tr>
+                      <td height="10" colspan="4"></td>
+                    </tr>
+                    <tr th:each="cartItem : ${cartItemList}">
+                      <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: black;  line-height: 18px;  vertical-align: top; padding:10px 0;" class="article">
+                        <span data-th-text="${cartItem.book.title}"></span>
+                      </td>
+                      <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;"><small>MH792AM/A</small></td>
+                      <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="center"  data-th-text="${cartItem.qty}"></td>
+                      <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #1e2b33;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="right" data-th-text="${cartItem.subtotal}"></td>
+                    </tr>
+                    <tr>
+                      <td height="1" colspan="4" style="border-bottom:1px solid #e4e4e4"></td>
+                    </tr>
+                    
+                    <tr>
+                      <td height="1" colspan="4" style="border-bottom:1px solid #e4e4e4"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td height="20"></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- /Order Details -->
+<!-- Total -->
+<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+  <tbody>
+    <tr>
+      <td>
+        <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+          <tbody>
+            <tr>
+              <td>
+
+                <!-- Table Total -->
+                <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                  <tbody>
+                    <tr>
+                      <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ">
+                        Subtotal
+                      </td>
+                      <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; white-space:nowrap;" width="80" data-th-text="${order.orderTotal}">
+                        
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ">
+                        Shipping &amp; Handling
+                      </td>
+                      <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; " >
+                        
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #b0b0b0; line-height: 22px; vertical-align: top; text-align:right; "><small>TAX</small></td>
+                      <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #b0b0b0; line-height: 22px; vertical-align: top; text-align:right; " data-th-text="${#numbers.formatDecimal(order.orderTotal*0.06,0,2)}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
+                        <strong>Total</strong>
+                      </td>
+                      <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; " th:with="total=${order.orderTotal+order.orderTotal*0.06}"
+            data-th-text="${#numbers.formatDecimal(total, 0, 2)}">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- /Table Total -->
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- /Total -->
+<!-- Information -->
+<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+  <tbody>
+    <tr>
+      <td>
+        <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+          <tbody>
+            <tr>
+            <tr class="hiddenMobile">
+              <td height="60"></td>
+            </tr>
+            <tr class="visibleMobile">
+              <td height="40"></td>
+            </tr>
+            <tr>
+              <td>
+                <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+
+                          <tbody>
+                            <tr>
+                              <td style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                <strong>BILLING INFORMATION</strong>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td width="100%" height="10"></td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                               
+                               <span th:text="${order.billingAddress.billingName}"></span><br/>
+			<span th:text="${order.billingAddress.billingstreet1}+' '+${order.billingAddress.billingstreet2}"></span><br/>
+			<span th:text="${order.billingAddress.city}+'  '+${order.billingAddress.state}+'  '+${order.billingAddress.billingzipcode}"></span><br/>
+                                </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+
+                        <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
+                          <tbody>
+                            <tr class="visibleMobile">
+                              <td height="20"></td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                <strong>PAYMENT METHOD</strong>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td width="100%" height="10"></td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                              Credit Card<br>
+                              Card Name: <span th:text="${order.payment.cardholder}"></span><br/>
+			Credit Card Type: <span th:text="${order.payment.type}"></span><br/>
+			
+                                <a href="#" style="color: black; text-decoration:underline;"><span th:text="${order.payment.cardnumber}"></span></a><br>
+
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                          <tbody>
+                            <tr class="hiddenMobile">
+                              <td height="35"></td>
+                            </tr>
+                            <tr class="visibleMobile">
+                              <td height="20"></td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                <strong>SHIPPING INFORMATION</strong>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td width="100%" height="10"></td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                
+                                <span th:text="${order.shippingAddress.shippingname}"></span><br/>
+					<span th:text="${order.shippingAddress.shippingstreet1}+' '+${order.shippingAddress.shippingstreet2}"></span><br/>
+					<span th:text="${order.shippingAddress.city}+'  '+${order.shippingAddress.state}+'  '+${order.shippingAddress.zipcode}"></span><br/>
+                                
+                            </tr>
+                          </tbody>
+                        </table>
+
+
+                        <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
+                          <tbody>
+                            <tr class="hiddenMobile">
+                              <td height="35"></td>
+                            </tr>
+                            <tr class="visibleMobile">
+                              <td height="20"></td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                <strong>SHIPPING METHOD</strong>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td width="100%" height="10"></td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                UPS: U.S. Shipping Services
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr class="hiddenMobile">
+              <td height="60"></td>
+            </tr>
+            <tr class="visibleMobile">
+              <td height="30"></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- /Information -->
+<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+
+  <tr>
+    <td>
+      <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff" style="border-radius: 0 0 10px 10px;">
+        <tr class="spacer">
+          <td height="10"></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td height="20"></td>
+  </tr>
+</table>
+</body>
+</html>

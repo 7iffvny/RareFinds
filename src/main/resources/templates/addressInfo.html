@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/userdashbordStatic/img/apple-icon.png">
+  <link rel="shortcut icon" type="image/png" href="/logo.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Edit User Profile
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="/userdashbordStatic/css/material-dashboard.css?v=2.1.0">
+  <link rel="stylesheet" href="/payment.css">
+  <link rel="stylesheet" href="//unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" type="text/css" />
+  <link rel="stylesheet" href="//unpkg.com/bootstrap-select@1.12.4/dist/css/bootstrap-select.min.css" type="text/css" />
+  <link rel="stylesheet" href="//unpkg.com/bootstrap-select-country@4.0.0/dist/css/bootstrap-select-country.min.css"
+    type="text/css" />
+  <script src="//unpkg.com/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="//unpkg.com/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+  <script src="//unpkg.com/bootstrap-select@1.12.4/dist/js/bootstrap-select.min.js"></script>
+  <script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>
+  <!-- <style>
+        body {
+            color: #000;
+            overflow-x: hidden;
+            height: 100%;
+            background-color: #fff;
+            background-repeat: no-repeat
+        }
+
+        .plus-minus {
+            position: relative
+        }
+
+        .plus {
+            position: absolute;
+            top: -4px;
+            left: 2px;
+            cursor: pointer
+        }
+
+        .minus {
+            position: absolute;
+            top: 8px;
+            left: 5px;
+            cursor: pointer
+        }
+
+        .vsm-text:hover {
+            color: #FF5252
+        }
+
+        .book,
+        .book-img {
+            width: 120px;
+            height: 180px;
+            border-radius: 5px
+        }
+
+        .book {
+            margin: 20px 15px 5px 15px
+        }
+
+        .border-top {
+            border-top: 1px solid #EEEEEE !important;
+            margin-top: 20px;
+            padding-top: 15px
+        }
+
+        .card {
+            margin: 40px 0px;
+            padding: 40px 50px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.2)
+        }
+
+        input,
+        textarea {
+            background-color: #F3E5F5;
+            padding: 8px 15px 8px 15px;
+            width: 100%;
+            border-radius: 5px !important;
+            box-sizing: border-box;
+            border: 1px solid #F3E5F5;
+            font-size: 15px !important;
+            color: #000 !important;
+            font-weight: 300
+        }
+
+        input:focus,
+        textarea:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            border: 1px solid #9FA8DA;
+            outline-width: 0;
+            font-weight: 400
+        }
+
+        button:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            outline-width: 0
+        }
+
+        .pay {
+            width: 80px;
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid #673AB7;
+            margin: 10px 20px 10px 0px;
+            cursor: pointer;
+            box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.2)
+        }
+
+        .gray {
+            -webkit-filter: grayscale(100%);
+            -moz-filter: grayscale(100%);
+            -o-filter: grayscale(100%);
+            -ms-filter: grayscale(100%);
+            filter: grayscale(100%);
+            color: #E0E0E0
+        }
+
+        .gray .pay {
+            box-shadow: none
+        }
+
+        #tax {
+            border-top: 1px lightgray solid;
+            margin-top: 10px;
+            padding-top: 10px
+        }
+
+        .btn-info {
+            border: none;
+            border-radius: 10px;
+            background-color: #c9a42b;
+            color: #fff;
+            padding: 8px 15px;
+            margin: 20px 0px;
+            cursor: pointer
+        }
+
+        .btn-info:hover {
+            background-color: #967d2a;
+            color: #fff
+        }
+
+        #checkout {
+            float: center;
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .book,
+            .book-img {
+                width: 100px;
+                height: 150px
+            }
+
+            .card {
+                padding-left: 15px;
+                padding-right: 15px
+            }
+
+            .mob-text {
+                font-size: 13px
+            }
+
+            .pad-left {
+                padding-left: 20px
+            }
+        }
+    </style>  -->
+
+<style>
+  .card {
+    font-size:15px;
+  }
+
+  .form-control {
+    color:#fff;
+    background-color: #1d1d1f;
+  }
+
+</style>
+
+</head>
+
+<body class="dark-edition">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="azure" data-background-color="black">
+      <div class="logo"><a th:href="@{/}" class="simple-text logo-normal"><img class="logo" src="logo.png" alt="" width="100"
+            height="80" />
+        </a></div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item ">
+            <a class="nav-link" th:href="@{/manage_account}">
+              <i class="material-icons">person</i>
+              <p>User Profile</p>
+            </a>
+          <li class="nav-item" th:classappend="${classActiveEdit}? 'active'">
+            <a class="nav-link" th:href="@{/edit_profile}">
+              <i class="material-icons">edit</i>
+              <p>Edit Profile</p>
+            </a>
+          </li>
+          <li class="nav-item " th:classappend="${classActiveEdit}? 'active'">
+            <a class="nav-link" th:href="@{/manage_password}">
+              <i class="material-icons">password</i>
+              <p>Change Password</p>
+            </a>
+          </li>
+          <li class="nav-item  " th:classappend="${classActiveBilling}? 'active'">
+            <a class="nav-link" th:href="@{/manage_payment}">
+              <i class="material-icons">payment</i>
+              <p>Payment Information</p>
+            </a>
+          </li>
+          <li class="nav-item " th:classappend="${classActiveOrders}? 'active'">
+            <a class="nav-link" th:href="@{/manage_order}">
+              <i class="material-icons">content_paste</i>
+              <p>Order History</p>
+            </a>
+          </li>
+          <li class="nav-item active" th:classappend="${classActiveShipping}? 'active'">
+            <a class="nav-link" th:href="@{/manage_address}">
+              <i class="material-icons">address</i>
+              <p>Address Information</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" th:href="@{/manage_promotion}">
+              <i class="material-icons">redeem</i>
+              <p>Promotions</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" th:href="@{/logout}">
+              <i class="material-icons">logout</i>
+              <p>Log Out</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <div class="content">
+        <div class="container-fluid">
+          <!-- Shipping Information -->
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Edit Address</h4>
+                </div>
+                <div class="card-body"></div>
+                <div class="tab-pane fade" id="tab-4" th:classappend="${classActiveShipping}? 'in active'">
+                  <div class="panel-group">
+                    <div class="panel panel-default" style="border: none;">
+                      <div class="panel-body" style="background-color: #1d1d1f; margin-top: 0px;">
+
+                        <ol class="breadcrumb" style="background-color: #1d1d1f; margin-top: -30px;">
+                          <li class="breadcrumb-item active"><a th:href="@{/listOfShippingAddresses}"
+                              class="btn btn-primary" role="button">List of
+                              Shipping Addresses</a></li>
+                          <li class="breadcrumb-item active"><a th:href="@{/addNewShippingAddress}"
+                              class="btn btn-primary" role="button">Add(Update)
+                              Shipping Address</a></li>
+                        </ol>
+
+                        <div th:if="${listOfShippingAddresses}">
+                          <form th:action="@{/setDefaultShippingAddress}" method="post">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th th:style="'color:white'">Default</th>
+                                  <th th:style="'color:white'">Shipping Address</th>
+                                  <th th:style="'color:white'">Operations</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr th:each="userShipping : ${userShippingList}">
+                                  <td><input type="radio" name="defaultShippingAddressId" style="height:15px;" th:value="${userShipping.id}"
+                                      th:checked="${userShipping.userShippingDefault}" /><span></span></td>
+                                  <td th:text="${userShipping.userShippingStreet1}+', '+
+														${userShipping.userShippingCity}+', '+${userShipping.userShippingState}"
+                                    th:style="${listOfShippingAddresses}? 'color:white'"></td>
+                                  <td><a th:href="@{/updateUserShipping(id=${userShipping.id})}"><i
+                                        class="fa fa-pencil"></i></a>&nbsp;&nbsp;<a
+                                      th:href="@{/removeUserShipping(id=${userShipping.id})}"><i
+                                        class="fa fa-times"></i></a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <button class="btn btn-primary pull-right" type="submit">Save</button>
+                          </form>
+                        </div>
+
+                        <div th:if="${addNewShippingAddress}">
+                          <form th:action="@{/addNewShippingAddress}" method="post">
+                            <div class="bg-info" th:if="${updateUserShippingInfo}">User
+                              info updated.</div>
+
+                            <input hidden="hidden" name="id" th:value="${userShipping.id}" />
+
+                            <!-- Shipping Address -->
+                            <hr />
+                            <div class="form-group">
+                              <h4 style="color:#8b92a9">Shipping Address</h4>
+                            </div>
+                            <div class="form-group">
+                              <label for="shippingName">* Name</label> <input type="text" class="form-control"
+                                id="shippingName" placeholder="Receiver Name" th:name="userShippingName"
+                                required="required" th:value="${userShipping.userShippingName}" />
+                            </div>
+                            <div class="form-group">
+                              <label for="shippingAddress">* Street Address</label> <input type="text"
+                                class="form-control" id="shippingAddress" placeholder="Street Address 1"
+                                th:name="userShippingStreet1" required="required"
+                                th:value="${userShipping.userShippingStreet1}" />
+                              <br />
+                              <input type="text" class="form-control" placeholder="Street Address 2"
+                                th:name="userShppingStreet2" th:value="${userShipping.userShippingStreet2}" />
+                            </div>
+
+                            <div class="row">
+                              <div class="col-xs-4">
+                                <div class="form-group">
+                                  <label for="shippingCity">* City</label> <input type="text" class="form-control"
+                                    id="shippingCity" placeholder="Shipping City" th:name="userShippingCity"
+                                    required="required" th:value="${userShipping.userShippingCity}" />
+                                </div>
+                              </div>
+                              <div class="col-xs-4">
+                                <div class="form-group">
+                                  <label for="shippingState">* State</label> <select id="shippingState"
+                                    class="form-control" style="height:34px; padding:0px 21px" th:name="userShippingState"
+                                    th:value="${userShipping.userShippingState}" required="required">
+                                    <option value="" disabled="disabled">Please
+                                      select an option</option>
+                                    <option th:each="state : ${stateList}" th:text="${state}"
+                                      th:selected="(${userShipping.userShippingState}==${state})"></option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-xs-4">
+                                <div class="form-group">
+                                  <label for="shippingZipcode">* Zipcode</label> <input type="text" class="form-control"
+                                    id="shippingZipcode" placeholder="Shipping Zipcode" th:name="userShippingZipcode"
+                                    required="required" th:value="${userShipping.userShippingZipcode}" />
+                                </div>
+                              </div>
+                            </div>
+
+                            <hr />
+                            <button type="submit" class="btn btn-primary btn-lg pull-right">Save
+                              Address</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const x = new Date().getFullYear();
+        let date = document.getElementById('date');
+        date.innerHTML = '&copy; ' + x + date.innerHTML;
+      </script>
+    </div>
+
+    <script src="../work-in-progress/assets/js/core/jquery.min.js"></script>
+    <script src="../work-in-progress/assets/js/core/popper.min.js"></script>
+    <script src="../work-in-progress/assets/js/core/bootstrap-material-design.min.js"></script>
+    <script src="https://unpkg.com/default-passive-events"></script>
+    <script src="../work-in-progress/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="../work-in-progress/assets/js/plugins/chartist.min.js"></script>
+    <script src="../work-in-progress/assets/js/plugins/bootstrap-notify.js"></script>
+    <script src="../work-in-progress/assets/js/material-dashboard.js?v=2.1.0"></script>
+    <script>
+      $(document).ready(function () {
+        $().ready(function () {
+          $sidebar = $('.sidebar');
+
+          $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+          $full_page = $('.full-page');
+
+          $sidebar_responsive = $('body > .navbar-collapse');
+
+          window_width = $(window).width();
+
+          $('.fixed-plugin a').click(function (event) {
+            if ($(this).hasClass('switch-trigger')) {
+              if (event.stopPropagation) {
+                event.stopPropagation();
+              } else if (window.event) {
+                window.event.cancelBubble = true;
+              }
+            }
+          });
+
+          $('.fixed-plugin .active-color span').click(function () {
+            $full_page_background = $('.full-page-background');
+
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
+
+            var new_color = $(this).data('color');
+
+            if ($sidebar.length != 0) {
+              $sidebar.attr('data-color', new_color);
+            }
+
+            if ($full_page.length != 0) {
+              $full_page.attr('filter-color', new_color);
+            }
+
+            if ($sidebar_responsive.length != 0) {
+              $sidebar_responsive.attr('data-color', new_color);
+            }
+          });
+
+          $('.fixed-plugin .background-color .badge').click(function () {
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
+
+            var new_color = $(this).data('background-color');
+
+            if ($sidebar.length != 0) {
+              $sidebar.attr('data-background-color', new_color);
+            }
+          });
+
+          $('.fixed-plugin .img-holder').click(function () {
+            $full_page_background = $('.full-page-background');
+
+            $(this).parent('li').siblings().removeClass('active');
+            $(this).parent('li').addClass('active');
+
+
+            var new_image = $(this).find("img").attr('src');
+
+            if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+              $sidebar_img_container.fadeOut('fast', function () {
+                $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+                $sidebar_img_container.fadeIn('fast');
+              });
+            }
+
+            if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+              var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+              $full_page_background.fadeOut('fast', function () {
+                $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+                $full_page_background.fadeIn('fast');
+              });
+            }
+
+            if ($('.switch-sidebar-image input:checked').length == 0) {
+              var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+              var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+              $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+              $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+            }
+
+            if ($sidebar_responsive.length != 0) {
+              $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+            }
+          });
+
+          $('.switch-sidebar-image input').change(function () {
+            $full_page_background = $('.full-page-background');
+
+            $input = $(this);
+
+            if ($input.is(':checked')) {
+              if ($sidebar_img_container.length != 0) {
+                $sidebar_img_container.fadeIn('fast');
+                $sidebar.attr('data-image', '#');
+              }
+
+              if ($full_page_background.length != 0) {
+                $full_page_background.fadeIn('fast');
+                $full_page.attr('data-image', '#');
+              }
+
+              background_image = true;
+            } else {
+              if ($sidebar_img_container.length != 0) {
+                $sidebar.removeAttr('data-image');
+                $sidebar_img_container.fadeOut('fast');
+              }
+
+              if ($full_page_background.length != 0) {
+                $full_page.removeAttr('data-image', '#');
+                $full_page_background.fadeOut('fast');
+              }
+
+              background_image = false;
+            }
+          });
+
+          $('.switch-sidebar-mini input').change(function () {
+            $body = $('body');
+
+            $input = $(this);
+
+            if (md.misc.sidebar_mini_active == true) {
+              $('body').removeClass('sidebar-mini');
+              md.misc.sidebar_mini_active = false;
+
+              $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+
+            } else {
+
+              $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+              setTimeout(function () {
+                $('body').addClass('sidebar-mini');
+
+                md.misc.sidebar_mini_active = true;
+              }, 300);
+            }
+
+            var simulateWindowResize = setInterval(function () {
+              window.dispatchEvent(new Event('resize'));
+            }, 180);
+
+            setTimeout(function () {
+              clearInterval(simulateWindowResize);
+            }, 1000);
+
+          });
+        });
+      });
+    </script>
+    <script>
+      $('.countrypicker').countrypicker();
+
+    </script>
+</body>
+
+</html>

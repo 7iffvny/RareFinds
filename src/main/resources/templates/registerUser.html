@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="/logo.png">
+    <title>Create an Account</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src= "/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/registerUser.css">
+    <script src="register.js"></script>
+
+</head>
+<style>
+* {
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+}
+
+
+
+section{
+	font-size:3rem;
+	position:relative;
+	height:100vh;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */    
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.label {
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.4em;
+    font-weight: 400;
+    line-height: 1em;
+    color: white;
+    text-align: left;
+     padding-bottom: 2px;
+     padding-top: -20px;
+}
+
+.email-input {
+    width: 505px;
+    height: 45px;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 11px;
+    background: none;
+    margin-top: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 20px;
+    padding-bottom: 2px;
+    outline: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.4em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.email-input-list {
+    margin-bottom: 10px;
+}
+
+.email-input:focus {
+    background: rgba(0, 0, 0, 0.10);
+}
+
+.email-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.email-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: rgba(255, 255, 255, 0.3);
+}
+  
+.email-input::-moz-placeholder { /* Firefox 19+ */
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.email-input:-ms-input-placeholder { /* IE 10+ */
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.email-input:-moz-placeholder { /* Firefox 18- */
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.email-input:focus::placeholder {
+    color: transparent;
+}
+
+.email-input:active {
+    background: rgba(0, 0, 0, 0.20);
+}
+
+.login-btn {
+    width: 200px;
+    height: 50px;
+    background-color: #1e1d1b;
+	background-image: linear-gradient(315deg, #1e1d1b 0%, #cc9934 74%);
+    border: 0px;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.55em;
+    font-weight: 300;
+    line-height: 1.1em;
+    color: white;
+    margin:auto;
+    margin-top:20px;
+    position:fixed;
+    left:35%;
+    text-align: center;
+    
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.login-btn:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.30);
+}
+
+
+h4 {
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.5em;
+    font-weight: 600;
+    line-height: 1.1em;
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 650px;
+    zoom: 60%;
+    height: 1000px;
+    border-radius: 30px;
+    background: linear-gradient(132.23deg, rgba(78, 223, 255, 0.512) 2.32%, rgba(255, 255, 255, 0.10) 109.87%);
+    transform:translate(-50%,-50%);
+    backdrop-filter: blur(26px) saturate(100%) contrast(80%) brightness(90%);
+    -webkit-backdrop-filter: blur(26px) saturate(100%) contrast(80%) brightness(90%);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.14);
+    overflow: hidden;
+}
+
+h5 {
+
+	color: #d09d1f;
+	;
+	margin-top: 2px;
+}
+
+h6 {
+
+	color: white;
+	text-align:center;
+	left:20%;
+	margin-top: 0px;
+	padding-left: 50px
+	padding-top: 0px;
+}
+
+h7 {
+
+	color: red;
+	text-align:center;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.3em;
+    font-weight: 400;
+    line-height: 0.9em;
+    margin-bottom: 5px;
+    margin-top: -10px;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(https://i.postimg.cc/6p0W5Dkp/Gradient-BG.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+</style>
+<body>
+    <div id="particles-js">
+			</div>
+			    <section>
+			    <div class="card">
+			      <div class="container">
+        <form th:action="@{/process_register}" method="post" th:object="${user}" class="form-inline"  id="myForm">
+        <h5 style="color: red;" th:if="${emailExists}">Email already exists. Choose a different one.</h5>
+      
+            <h6>Sign up with your social media account or email address</h6>
+            <div class="social-btn text-center">
+                <a href="#" class="btn btn-primary btn-lg"><i class="fa fa-facebook"></i> Facebook</a>
+                <a href="#" class="btn btn-danger btn-lg"><i class="fa fa-google"></i> Google</a>
+            </div>
+					<ul class="email-input-list">
+			  				<li class="label">First Name</li>
+			    			<li><input type = "text" class="email-input" th:field="*{firstname}" id="txt" onkeyup="Validate(this)" required ></li>
+			     	</ul>
+			     
+			     		<ul>
+			     			<li class="label">Last Name</li>
+			       			<li><input type = "text" class="email-input" th:field="*{lastname}" id="txt" onkeyup="Validate(this)" required ></li>
+			        	</ul>
+			        	<ul>
+			      
+			                <li class="label">Username</li>
+			                
+			                <li><input type = "text" class="email-input" th:field="*{username}" id="txt" onkeyup="Validate(this)" required ></li>
+			            </ul>
+			            <ul>
+			                <li class="label">Email Address</li>
+			                <li><input type = "email" class="email-input" th:field="*{emailaddress}" id="email" onchange="email_validate(this.value);" ></li>
+			            </ul>
+			            <ul>
+			                <li class="label">Password</li>
+			                <li><input type = "password" class="email-input" th:field="*{password}" minlength="4" id="pass1" ></li>
+			            </ul>
+			            <ul>
+			                <li class="label">Phone Number</li>
+			                <li><input type = "text" class="email-input" th:field="*{phonenumber}"></li>
+			            </ul>
+			            <div><h6>Already have an account? <a th:href="@{/user_login}">Login here</a></h6></div>
+			            <div><button class="login-btn">Sign up</button></div>
+		
+    </form>
+    </div>
+    </div>
+    </section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js">
+</script>
+
+<script>
+particlesJS("particles-js", {
+	  "particles": {
+		    "number": {
+		      "value": 25,
+		      "density": {
+		        "enable": false,
+		        "value_area": 1104.8088779284833
+		      }
+		    },
+		    "color": {
+		      "value": "#ea9d39"
+		    },
+		    "shape": {
+		      "type": "circle",
+		      "stroke": {
+		        "width": 0,
+		        "color": "#000000"
+		      },
+		      "polygon": {
+		        "nb_sides": 3
+		      },
+		      "image": {
+		        "src": "img/github.svg",
+		        "width": 100,
+		        "height": 100
+		      }
+		    },
+		    "opacity": {
+		      "value": 0.809720656394839,
+		      "random": false,
+		      "anim": {
+		        "enable": false,
+		        "speed": 1,
+		        "opacity_min": 0.1,
+		        "sync": false
+		      }
+		    },
+		    "size": {
+		      "value": 80,
+		      "random": true,
+		      "anim": {
+		        "enable": false,
+		        "speed": 40,
+		        "size_min": 0.1,
+		        "sync": false
+		      }
+		    },
+		    "line_linked": {
+		      "enable": false,
+		      "distance": 150,
+		      "color": "#ffffff",
+		      "opacity": 0.4,
+		      "width": 1
+		    },
+		    "move": {
+		      "enable": true,
+		      "speed": 4,
+		      "direction": "none",
+		      "random": false,
+		      "straight": false,
+		      "out_mode": "out",
+		      "bounce": false,
+		      "attract": {
+		        "enable": false,
+		        "rotateX": 600,
+		        "rotateY": 1200
+		      }
+		    }
+		  },
+		  "interactivity": {
+		    "detect_on": "window",
+		    "events": {
+		      "onhover": {
+		        "enable": true,
+		        "mode": "repulse"
+		      },
+		      "onclick": {
+		        "enable": true,
+		        "mode": "push"
+		      },
+		      "resize": true
+		    },
+		    "modes": {
+		      "grab": {
+		        "distance": 400,
+		        "line_linked": {
+		          "opacity": 1
+		        }
+		      },
+		      "bubble": {
+		        "distance": 400,
+		        "size": 40,
+		        "duration": 2,
+		        "opacity": 8,
+		        "speed": 3
+		      },
+		      "repulse": {
+		        "distance": 200,
+		        "duration": 0.4
+		      },
+		      "push": {
+		        "particles_nb": 4
+		      },
+		      "remove": {
+		        "particles_nb": 2
+		      }
+		    }
+		  },
+		  "retina_detect": true
+		});</script>
+</body>  
+
+</html>
