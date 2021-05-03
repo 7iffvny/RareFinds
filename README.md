@@ -6,7 +6,7 @@ RareFinds Website by:
 * Sammy Vo
 
 ## Bookstore System
-Sprint 2 projects for online Bookstore system using Spring boot and MySQL Database.
+Online Bookstore system using Spring boot and MySQL Database.
 user credentials stored in MySQL database. Tokens (persistent-logins) are stored in the database as well. Passwords are encrypted with the BCrypt algorithm.
 A Spring Boot web app with the following features:
 Login and registration pages
