@@ -1,4 +1,4 @@
-# Bookstore System Eclipse
+# RareFinds
 RareFinds Website by:
 * Jane Odum
 * Tiffany Nguyen
